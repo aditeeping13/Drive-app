@@ -1,30 +1,37 @@
-FROM openjdk:21-jdk-slim
+# Use official OpenJDK 21 image
+# ---------- Build Stage ----------
+FROM openjdk:21-jdk-slim as builder
 
 WORKDIR /app
 
-# Copy Maven wrapper and pom.xml first for better layer caching
+# Copy Maven wrapper and pom.xml for dependency caching
 COPY mvnw pom.xml ./
 COPY .mvn .mvn
 RUN chmod +x mvnw
+RUN ./mvnw dependency:go-offline -B
 
-# Download dependencies (this layer will be cached if pom.xml doesn't change)
-RUN ./mvnw dependency:go-offline
-
-# Copy source code
+# Copy source code and build
 COPY src src
+RUN ./mvnw clean package -DskipTests -B
 
-# Copy frontend build to static resources
-COPY frontend/build src/main/resources/static
+# ---------- Runtime Stage ----------
+FROM openjdk:21-jre-slim
 
-# Build the application
-RUN ./mvnw clean package -DskipTests
+WORKDIR /app
 
-# Use multi-stage build for smaller final image (optional)
-# FROM openjdk:21-jre-slim
-# WORKDIR /app
-# COPY --from=0 /app/target/*.jar app.jar
+# Copy only the final jar from builder stage
+COPY --from=builder /app/target/*.jar app.jar
 
+# Run as non-root user (better security)
+RUN addgroup --system spring && adduser --system --ingroup spring spring && \
+    chown -R spring:spring /app
+USER spring
+
+# Expose Render's port
 EXPOSE 8080
 
-# More flexible JAR execution
-CMD ["sh", "-c", "java -jar target/*.jar"]
+# JVM optimizations (Render sets RAM/CPU automatically)
+ENV JAVA_OPTS="-XX:MaxRAMPercentage=75.0 -XX:+ExitOnOutOfMemoryError"
+
+# Start the app
+CMD ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
