@@ -11,6 +11,10 @@
 **Drive App** is a Google Drive–like **file management system** built with **Spring Boot, React, and MySQL**.  
 It allows users to upload, view, search, download, and delete files seamlessly.  
 
+## 🌐 Live Demo
+- **Frontend**: [https://charming-pika-4292b1.netlify.app](https://charming-pika-4292b1.netlify.app)  
+- **Backend API**: [https://drive-app-2ftu.onrender.com/api/files/list](https://drive-app-2ftu.onrender.com/api/files/list)
+
 ---
 
 ## 🛠️ Tech Stack  
