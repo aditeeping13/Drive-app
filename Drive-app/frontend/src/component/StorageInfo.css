@@ -1,0 +1,49 @@
+.storage-info {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.storage-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #3c4043;
+}
+
+.progress-bar-container {
+  height: 4px;
+  background: #dadce0;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: #1a73e8;
+  border-radius: 2px;
+}
+
+.storage-text {
+  font-size: 13px;
+  color: #5f6368;
+  margin: 0 0 16px 0;
+}
+
+.buy-storage-btn {
+  background: white;
+  border: 1px solid #dadce0;
+  color: #1a73e8;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.buy-storage-btn:hover {
+  background: #f8f9fa;
+}

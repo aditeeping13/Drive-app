@@ -1,0 +1,25 @@
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 18px;
+  color: #5f6368;
+  margin-bottom: 20px;
+}
+
+.breadcrumb-item {
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.breadcrumb-item:hover {
+  background: #f1f3f4;
+  color: #202124;
+}
+
+.breadcrumb-separator {
+  margin: 0 4px;
+  color: #bdc1c6;
+}
