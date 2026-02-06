@@ -24,7 +24,6 @@ public class FileEntity {
     private boolean isFolder = false;
     private String category = "my-drive";
     private String owner = "Me";
-    private String owner = "Me";
     private LocalDateTime lastAccessedAt;
 
     public FileEntity() {
